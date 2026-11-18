@@ -200,30 +200,28 @@ for _ in range(100):
 
 
 def esc(s):
-    return s.replace("|", "\\|").replace("\n", " ").replace("\r", " ")
+    return s.replace("\n", " ").replace("\r", " ")
 
 
 lines = []
-lines.append("# Fuzzing Report")
+lines.append("FUZZING REPORT")
 lines.append("")
 lines.append("Summary: %d findings across %d methods fuzzed." % (len(findings), len(exercised)))
 lines.append("")
-lines.append("## Methods exercised")
 lines.append("")
-lines.append("| method | calls | findings |")
-lines.append("| --- | --- | --- |")
+lines.append("METHODS EXERCISED")
+lines.append("")
 for m in METHOD_NAMES:
     hits = sum(1 for f in findings if f[0] == m)
-    lines.append("| %s | %d | %d |" % (m, exercised.get(m, 0), hits))
+    lines.append("%-32s calls=%-5d findings=%d" % (m, exercised.get(m, 0), hits))
 lines.append("")
-lines.append("## Findings")
 lines.append("")
-lines.append("| method | input | exception | message |")
-lines.append("| --- | --- | --- | --- |")
+lines.append("FINDINGS")
+lines.append("")
 for f in findings:
-    lines.append("| %s | %s | %s | %s |" % (f[0], esc(f[1]), f[2], esc(f[3])))
+    lines.append("%s | %s | %s | %s" % (f[0], esc(f[1]), f[2], esc(f[3])))
 
-with open(os.path.join(ROOT, "fuzz_report.md"), "w", encoding="utf-8") as fh:
+with open(os.path.join(ROOT, "fuzz_report.txt"), "w", encoding="utf-8") as fh:
     fh.write("\n".join(lines) + "\n")
 
-print("fuzz: %d findings across %d methods fuzzed; report written to fuzz_report.md" % (len(findings), len(exercised)))
+print("fuzz: %d findings across %d methods fuzzed; report written to fuzz_report.txt" % (len(findings), len(exercised)))
