@@ -7,4 +7,4 @@ Members:
 
 Course: COMP 5710/6710 Software Quality Assurance, Fall 2026.
 
-Project: software quality assurance activities integrated into KubeSec, a Kubernetes manifest security scanner. See KUBESEC-README.md for the original project documentation.
+Project: software quality assurance activities integrated into KubeSec, a Kubernetes manifest security scanner. The original project is in KubeSec/ (see KubeSec/KUBESEC-README.md).
